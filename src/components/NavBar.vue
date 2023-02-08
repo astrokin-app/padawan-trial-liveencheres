@@ -13,13 +13,13 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
+        <b-button v-b-modal.my-modal>Se connecter</b-button>
+        <b-modal id="my-modal">Hello From My Modal!</b-modal>
+
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
           <b-button size="sm" class="my-sm-0" type="submit">Rechercher</b-button>
         </b-nav-form>
-
-        <b-button v-b-modal.my-modal>Se connecter</b-button>
-        <b-modal id="my-modal">Hello From My Modal!</b-modal>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -62,7 +62,7 @@ a {
 
 .collapse.show {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   margin-top: 2rem;
 }
 
