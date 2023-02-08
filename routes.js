@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Homepage from './src/components/HomePage.vue';
-import SearchPage from './src/components/SearchPage.vue';
+import Homepage from './src/views/HomePage.vue'
+import SearchPage from './src/views/SearchPage.vue';
 
 Vue.use(Router);
 

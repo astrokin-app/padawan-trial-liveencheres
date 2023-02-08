@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'searchpage',
+  name: 'HomePage',
   // App data
   data() {
       return {
