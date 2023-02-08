@@ -9,6 +9,8 @@
     "server": "json-server --watch db.json"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.6.4",
     "eslint": "^7.1.0",
     "eslint-plugin-vue": "^6.2.2",
