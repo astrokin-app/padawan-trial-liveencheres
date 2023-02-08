@@ -1,6 +1,7 @@
 {
   "sales": [
-    { "id": 1, "title": "Belle vente mobilière", "description": "Suite à successions : vente de beau mobilier, objets d'art, tableaux anciens et modernes, pendule en bronze doré ..." }
+    { "id": 1, "title": "Belle vente mobilière", "description": "Suite à successions : vente de beau mobilier, objets d'art, tableaux anciens et modernes, pendule en bronze doré ..." },
+    { "id": 2, "title": "Montres a vendre", "description": "Suite à successions : vente de belles montres or et argent." }
   ],
   "items": [
     { "id": 1, "sale_id": 1, "description": "Petit cache pot en porcelaine tendre monogrammé sur les deux faces. Marque découronné ' Duc d'Angoulême' ?. Epoque XIXème. Dimensions : 8,5 X11,3 cm." },
