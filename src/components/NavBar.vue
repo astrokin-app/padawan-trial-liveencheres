@@ -29,6 +29,10 @@
 
 <style scoped>
 .navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
   padding: 1rem;
 }
 .form-inline {

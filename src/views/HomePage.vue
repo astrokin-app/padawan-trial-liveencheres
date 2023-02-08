@@ -1,57 +1,71 @@
 <template>
-  
-    <!-- <b-img :src="transformImgExt('https://www.interencheres.com/asgard/images/home/big-header.webp?v=bdf5f59cdde9616e63fa6023c706628a')" fluid alt="Responsive image" style="width: -webkit-fill-available;"></b-img> -->
+<div>
+  <b-container>
+    <b-img :src="transformImgExt('https://www.interencheres.com/asgard/images/home/big-header.webp?v=bdf5f59cdde9616e63fa6023c706628a')" fluid alt="Responsive image" style="width: -webkit-fill-available;"></b-img>
+    <b-row align-v="center" style="min-height: 10rem;" class="text-white font-weight-medium">
+      <b-col>3M+ de lots expertisés</b-col>
+      <b-col>Garantie des commisaires-priseurs</b-col>
+      <b-col>330+ Maisons de ventes partenaires</b-col>
+    </b-row>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-        alt="Hollywood Sign on The Hill" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
+      <div class="col">
+        <div class="card">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+            alt="Hollywood Sign on The Hill" />
+          <div class="card-body bg-dark text-white" >
+            <h5 class="card-title text-end">Card title</h5>
+            <!-- <p class="card-text">
+              This is a longer card with supporting text below as a natural lead-in to
+              additional content. This content is a little bit longer.
+            </p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top"
+            alt="Palm Springs Road" />
+          <div class="card-body bg-dark border-white text-white">
+            <h5 class="card-title text-end">Card title</h5>
+            <!-- <p class="card-text">
+              This is a longer card with supporting text below as a natural lead-in to
+              additional content. This content is a little bit longer.
+            </p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top"
+            alt="Los Angeles Skyscrapers" />
+          <div class="card-body bg-dark text-white">
+            <h5 class="card-title text-end">Card title</h5>
+            <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+              additional content.
+            </p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
+            alt="Skyscrapers" />
+          <div class="card-body bg-dark text-white">
+            <h5 class="card-title text-end">Card title</h5>
+            <!-- <p class="card-text">
+              This is a longer card with supporting text below as a natural lead-in to
+              additional content. This content is a little bit longer.
+            </p> -->
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top"
-        alt="Palm Springs Road" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top"
-        alt="Los Angeles Skyscrapers" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-          additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
-        alt="Skyscrapers" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
+    <b-row align-v="center" style="min-height: 10rem;" class="text-white font-weight-medium">
+      <b-col>Paiement sécurisé</b-col>
+      <b-col>Assistance 7j/7</b-col>
+      <b-col>N°1 des enchères en France</b-col>
+    </b-row>
+  </b-container>
 </div>
 </template>
 
@@ -104,3 +118,10 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.card {
+  border : 2px solid #2E2E2E;
+  border-radius: 0;
+}
+</style>
