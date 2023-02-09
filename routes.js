@@ -14,8 +14,13 @@ export default new Router({
       component: Homepage
     },
     {
-      path: '/search',
-      name: 'searchpage',
+      path: '/search:lots',
+      name: 'lots',
+      component: SearchPage
+    },
+    {
+      path: '/search:sales',
+      name: 'sales',
       component: SearchPage
     }
   ]

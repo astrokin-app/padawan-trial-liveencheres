@@ -1,5 +1,5 @@
 <template>
-<footer class="page-footer font-small pt-4 text-white" style="background: #212529;">
+<footer class="page-footer font-small pt-4 text-white mt-4" style="background: #212529;">
   <div class="container-fluid text-center text-md-left">
     <div class="row">
       <div class="col-md-12 mt-md-0 mt-3">
@@ -12,3 +12,6 @@
   <div class="footer-copyright text-center py-3">© 2023 Copyright:</div>
 </footer>
 </template>
+
+<style>
+</style>

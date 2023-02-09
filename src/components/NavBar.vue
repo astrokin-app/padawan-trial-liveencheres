@@ -7,8 +7,8 @@
 
     <b-collapse id="nav-collapse" is-nav class="nav-flex">
       <b-navbar-nav>
-        <router-link to="/search" active-class>Trouver des ventes et des lots</router-link>
-        <router-link to="/" active-class>Acheter aux enchères</router-link>
+        <!-- <router-link to="/search" active-class>Trouver des ventes et des lots</router-link> -->
+        <router-link to="/">Acheter aux enchères</router-link>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -25,6 +25,7 @@
           </b-modal>
         </div>
         <div v-if="admin">
+          <!-- add component -->
           <b-button v-b-modal.my-modal>Créer une vente</b-button>
           <b-modal id="my-modal" :no-close-on-backdrop="true">
             <div>
@@ -75,8 +76,8 @@
           </b-modal>
         </div>
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
-          <b-button size="sm" class="my-sm-0" type="submit">Rechercher</b-button>
+          <b-form-input v-model="search" size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
+          <b-button size="sm" class="my-sm-0" @click="goToSearch()">Rechercher</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-collapse>
@@ -105,7 +106,9 @@ export default {
       },
       lots: [{
         description: ''
-      }]
+      }],
+      search: '',
+      lastQueryUrl: ''
     }
   },
 
@@ -116,9 +119,21 @@ export default {
     },
 
     async createSale() {
-      const salesStores = useSalesStore()
+      this.$bvModal.hide('my-modal')
 
-      await salesStores.CreateSales(this.newSale)
+      const salesStore = useSalesStore()
+
+      await salesStore.CreateSales(this.newSale)
+    },
+
+    goToSearch() {
+      console.log(this.lastQueryUrl, this.$route.fullPath)
+      if (this.$route.fullPath !== this.lastQueryUrl || this.$route.query.params !== this.search) {
+        this.$router.push({ path: `search${ this.$route.params.lots ? this.$route.params.lots : ':lots' }`, query: { params: this.search }})
+      }
+
+      this.lastQueryUrl = this.$route.fullPath
+
     },
 
     addLot() {
@@ -186,6 +201,28 @@ a {
 
 ul {
   flex-direction: row-reverse;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  padding: 1rem;
+}
+
+a.router-link-active {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 0.2rem;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .navbar-expand-lg .navbar-nav {

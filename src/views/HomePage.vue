@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div style="height: auto;">
     <b-container>
       <b-img :src="transformImgExt('https://www.interencheres.com/asgard/images/home/big-header.webp?v=bdf5f59cdde9616e63fa6023c706628a')" fluid alt="Responsive image" style="width: -webkit-fill-available;"></b-img>
       <b-row align-v="center" style="min-height: 10rem;" class="text-white font-weight-medium">
@@ -10,7 +10,7 @@
       </b-row>
       <div v-if="getResult">
         <div >
-          <h3 class="text-white m-4">Les catégories</h3>
+          <h3 class="text-white m-4">Les ventes</h3>
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div v-for="sale in getResult.data" :key="sale.id" class="col">
               <div class="card" role="button">
