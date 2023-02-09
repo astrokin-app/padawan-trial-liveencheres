@@ -13,9 +13,16 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-button v-b-modal.my-modal>Se connecter</b-button>
-        <b-modal id="my-modal">Hello From My Modal!</b-modal>
-
+        <div v-if="!admin">
+          <b-button v-b-modal.my-modal>Se connecter</b-button>
+          <b-modal id="my-modal" @ok="signinUser($event)" :no-close-on-backdrop="true">Connecter vous pour pouvoir créer de nouvelles ventes.</b-modal>
+        </div>
+        <div v-if="admin">
+          <b-button v-b-modal.my-modal>Créer une vente</b-button>
+          <b-modal id="my-modal" @ok="signinUser($event)" :no-close-on-backdrop="true">
+            <Form :items="newItems" @refresh="refreshDatas($event)"></Form>
+          </b-modal>
+        </div>
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
           <b-button size="sm" class="my-sm-0" type="submit">Rechercher</b-button>
@@ -26,6 +33,38 @@
   <router-view></router-view>
 </div>
 </template>
+
+<script>
+import Form from '../components/Form.vue'
+import { useSalesStore } from '../stores/salesStore';
+
+export default {
+  components: {
+    Form
+  },
+
+  data() {
+    return {
+      admin: false,
+      newItems: [{description: ''}],
+    }
+  },
+
+  methods: {
+    signinUser(e) {
+      console.log('Bienvenue admin!', e)
+      this.admin = true
+    },
+
+    async refreshDatas(newVal) {
+      const salesStore = useSalesStore()
+
+      salesStore.sales.data.splice(salesStore.sales.data.length, 0, newVal)
+      salesStore.lots.splice(salesStore.sales.data.length, 0, newVal.description)
+    }
+  },
+}
+</script>
 
 <style scoped>
 .navbar {

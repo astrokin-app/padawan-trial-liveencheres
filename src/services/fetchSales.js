@@ -13,7 +13,6 @@ export const fetchSales = async () => {
     // fetch items by sales id
     const itemsPromises = data.map(async sale => {
       const itemRes = await fetch(`${baseURL}/items?sale_id=${sale.id}`);
-      console.log(itemRes)
       sale.items = await itemRes.json();
     });
     

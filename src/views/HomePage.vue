@@ -27,15 +27,13 @@
             </div>
           </div>
           <h4 class="text-white m-4">Les lots</h4>
-            <div v-for="sale in getResult.data" :key="sale.id">
-              <div  class="row row-cols-1 row-cols-md-3 g-4">
-              <div v-for="item in sale.items" :key="item.id" class="col">
-                <div class="card" role="button">
-                  <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                    alt="Hollywood Sign on The Hill" />
-                  <div class="card-body bg-dark text-white" >
-                    <p class="card-text">{{ item.description }}</p>
-                  </div>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div v-for="(item, idx) in getResultChilds" :key="idx" class="col">
+              <div class="card" role="button">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+                  alt="Hollywood Sign on The Hill" />
+                <div class="card-body bg-dark text-white" >
+                  <p class="card-text">{{ item }}</p>
                 </div>
               </div>
             </div>
@@ -52,15 +50,15 @@
 </template>
 
 <script>
-import { fetchSales } from '../services/api'
+import { useSalesStore } from '../stores/salesStore';
 
 export default {
   name: 'HomePage',
   data() {
     return {
-      getResult: null,
+      getResult: undefined,
+      getResultChilds: undefined,
       newItems: [{description: ''}],
-      saleId: null,
     }
   },
 
@@ -78,17 +76,15 @@ export default {
         return url;
       }
     },
-    refreshSales(newVal) {
-      console.log(newVal)
-      this.getResult.data.push(newVal)
-    }
   },
 
   async beforeCreate() {
-    this.getResult = await fetchSales()
+    const salesStores = useSalesStore()
 
-    // id to create new sale items relationship
-    this.saleId = this.getResult.data.length + 1
+    await salesStores.FetchSales()
+
+    this.getResult = salesStores.sales
+    this.getResultChilds = salesStores.lots
   },
 
   created() {
