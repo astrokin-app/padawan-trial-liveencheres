@@ -13,19 +13,131 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
+        <div v-if="!admin">
+          <b-button v-b-modal.my-modal>Se connecter</b-button>
+          <b-modal id="my-modal" @ok="signinUser($event)" :no-close-on-backdrop="true">
+            Connecter vous pour pouvoir créer de nouvelles ventes.
+            <template #modal-footer>
+              <button v-b-modal.modal-close_visit class="btn btn-danger btn-sm m-1" @click="$bvModal.hide('my-modal')">Fermer</button>
+              <button v-b-modal.modal-close_visit class="btn btn-success btn-sm m-1" @click="signinUser($event)">Connecter</button>
+            </template>
+
+          </b-modal>
+        </div>
+        <div v-if="admin">
+          <b-button v-b-modal.my-modal>Créer une vente</b-button>
+          <b-modal id="my-modal" :no-close-on-backdrop="true">
+            <div>
+              <b-card bg-variant="light">
+                <b-form-group
+                  label-cols-lg="12"
+                  label="Créer une vente"
+                  label-size="lg"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-group
+                    label="Titre:"
+                    label-for="nested-street"
+                    label-cols-sm="12"
+                    label-align-sm="right"
+                  >
+                    <b-form-input id="nested-title" v-model="newSale.title"></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group
+                    label="Description:"
+                    label-for="nested-city"
+                    label-cols-sm="12"
+                    label-align-sm="right"
+                  >
+                    <b-form-input id="nested-description" v-model="newSale.description"></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group
+                    v-for="(lot, index) in lots" :key="index"
+                    label="Lot description:"
+                    label-for="nested-state"
+                    label-cols-sm="12"
+                    label-align-sm="right"
+                  >
+                    <b-form-textarea id="nested-lot" v-model="newSale.items[index]"></b-form-textarea>
+                  </b-form-group>
+                </b-form-group>
+              </b-card>
+            </div>
+            <template #modal-footer>
+              <button v-b-modal.modal-close_visit class="btn btn-danger btn-sm m-1" @click="$bvModal.hide('my-modal')">Fermer</button>
+              <button v-b-modal.modal-close_visit class="btn btn-warning btn-sm m-1" @click="removeLot()">Supprimer lot</button>
+              <button v-b-modal.modal-close_visit class="btn btn-primary btn-sm m-1" @click="addLot()">Ajouter lot</button>
+              <button v-b-modal.modal-close_visit class="btn btn-success btn-sm m-1" @click="createSale(), refreshDatas()">Creer</button>
+            </template>
+          </b-modal>
+        </div>
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
           <b-button size="sm" class="my-sm-0" type="submit">Rechercher</b-button>
         </b-nav-form>
-
-        <b-button v-b-modal.my-modal>Se connecter</b-button>
-        <b-modal id="my-modal">Hello From My Modal!</b-modal>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
   <router-view></router-view>
 </div>
 </template>
+
+<script>
+// import Form from '../components/Form.vue'
+import { useSalesStore } from '../stores/salesStore';
+
+export default {
+  components: {
+    // Form
+  },
+
+  data() {
+    return {
+      admin: false,
+      newItems: [{description: ''}],
+      newSale: {
+        title: '',
+        description: '',
+        items: [],
+      },
+      lots: [{
+        description: ''
+      }]
+    }
+  },
+
+  methods: {
+    signinUser(e) {
+      console.log('Bienvenue admin!', e)
+      this.admin = true
+    },
+
+    async createSale() {
+      const salesStores = useSalesStore()
+
+      await salesStores.CreateSales(this.newSale)
+    },
+
+    addLot() {
+      return this.lots.push({description: ''})
+    },
+
+    removeLot() {
+      return this.lots.pop()
+    },
+
+    async refreshDatas() {
+      const salesStore = useSalesStore()
+
+      salesStore.sales.data.splice(salesStore.sales.data.length, 0, this.newSale)
+      this.newSale.items.map(description => {salesStore.lots.data.splice(salesStore.lots.data.length, 0, description)})
+    }
+  },
+}
+</script>
 
 <style scoped>
 .navbar {
@@ -62,7 +174,7 @@ a {
 
 .collapse.show {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   margin-top: 2rem;
 }
 
