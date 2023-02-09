@@ -120,14 +120,24 @@ export default {
 
     async createSale() {
       this.$bvModal.hide('my-modal')
-
+  
       const salesStore = useSalesStore()
 
       await salesStore.CreateSales(this.newSale)
+
+      // reset form
+      this.newSale = {
+        title: '',
+        description: '',
+        items: [],
+      }
+      this.lots = [{
+        description: ''
+      }]
+
     },
 
     goToSearch() {
-      console.log(this.lastQueryUrl, this.$route.fullPath)
       if (this.$route.fullPath !== this.lastQueryUrl || this.$route.query.params !== this.search) {
         this.$router.push({ path: `search${ this.$route.params.lots ? this.$route.params.lots : ':lots' }`, query: { params: this.search }})
       }
@@ -137,11 +147,12 @@ export default {
     },
 
     addLot() {
-      return this.lots.push({description: ''})
+      this.lots.push({description: ''})
     },
 
     removeLot() {
-      return this.lots.pop()
+      this.lots.pop()
+      this.newSale.items.pop()
     },
 
     async refreshDatas() {
