@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-container>
-      <div style="height: auto;">
+      <div style="min-height: 1200px;">
         <div class="mb-4 mt-4">
           <b-tabs content-class="nav-tabs d-flex" align="evenly">
-            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="LOTS" @click="activeTab('lots')" :class="this.isActive === 'lots' ? 'active' : ''"></b-tab>
-            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="VENTES" @click="activeTab('sales')" :class="this.isActive === 'sales' ? 'active' : ''"></b-tab>
+            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="LOTS" @click="activeTab('lots')" :class="this.isActive === 'lots' ? 'active' : ''"><span class="text-white">{{ getResultChilds ? 'Les lots' : 'Aucune lot'}}</span></b-tab>
+            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="VENTES" @click="activeTab('sales')" :class="this.isActive === 'sales' ? 'active' : ''"><span class="text-white">{{ getResult ? 'Les ventes' : 'Aucune vente'}}</span></b-tab>
           </b-tabs>
         </div>
         <div>
@@ -65,11 +65,10 @@ export default {
           this.showSales = true
 
           let filteredSales = salesStore.sales.data.filter(sale => {
-            // console.log(this.$route.query.params.toLowerCase(), sale)
             return sale.description.toLowerCase().includes(search.toLowerCase()) 
           })
 
-          this.getResult = filteredSales
+          this.getResult = filteredSales && filteredSales.length > 0 ? filteredSales : undefined
         }
 
         if (this.$route.path === '/search:lots') {
@@ -77,11 +76,10 @@ export default {
           this.showSales = false
 
           let filteredLots = salesStore.lots.data.filter(lot => {
-            // console.log(this.$route.query.params.toLowerCase(), lot)
             return lot.toLowerCase().includes(search.toLowerCase()) 
           })
           
-          this.getResultChilds = filteredLots
+          this.getResultChilds = filteredLots && filteredLots.length > 0 ? filteredLots : undefined
         }
 
         this.lastQueryUrl = this.$route.path + '?' + this.$route.query.params

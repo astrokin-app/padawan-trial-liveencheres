@@ -1,6 +1,6 @@
 
 <template>
-  <div style="height: auto;">
+  <div style="min-height: 1200px;">
     <b-container>
       <b-img :src="transformImgExt('https://www.interencheres.com/asgard/images/home/big-header.webp?v=bdf5f59cdde9616e63fa6023c706628a')" fluid alt="Responsive image" style="width: -webkit-fill-available;"></b-img>
       <b-row align-v="center" style="min-height: 10rem;" class="text-white font-weight-medium">
