@@ -4,8 +4,8 @@
       <div style="min-height: 1200px;">
         <div class="mb-4 mt-4">
           <b-tabs content-class="nav-tabs d-flex" align="evenly">
-            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="LOTS" @click="activeTab('lots')" :class="this.isActive === 'lots' ? 'active' : ''"><span class="text-white">{{ getResultChilds ? 'Les lots' : 'Aucune lot'}}</span></b-tab>
-            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="VENTES" @click="activeTab('sales')" :class="this.isActive === 'sales' ? 'active' : ''"><span class="text-white">{{ getResult ? 'Les ventes' : 'Aucune vente'}}</span></b-tab>
+            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="LOTS" @click="switchTabAndExecuteQuery('lots')" :class="this.isActive === 'lots' ? 'active' : ''"><span class="text-white">{{ getResultChilds ? 'Les lots' : 'Aucune lot'}}</span></b-tab>
+            <b-tab title-link-class="link-title" :title-item-class="'tab-title-class'" title="VENTES" @click="switchTabAndExecuteQuery('sales')" :class="this.isActive === 'sales' ? 'active' : ''"><span class="text-white">{{ getResult ? 'Les ventes' : 'Aucune vente'}}</span></b-tab>
           </b-tabs>
         </div>
         <div>
@@ -78,7 +78,7 @@ export default {
   },
 
   methods: {
-    activeTab(type) {
+    switchTabAndExecuteQuery(type) {
       this.isActive = type
       if (!this.$route.path.includes(this.isActive) || !this.lastQueryUrl.includes(this.$route.query.params)) {
         this.$router.push({ path: `search:${this.isActive}`, query: { params: this.$route.query.params }})
