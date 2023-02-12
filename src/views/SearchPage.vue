@@ -55,42 +55,27 @@ export default {
   },
 
   watch: { 
-  '$route.query.params': {
-    handler: async function(search) {
-      const salesStore = useSalesStore()
+    '$route.query.params': {
+      handler: async function(search) {
+        const salesStore = useSalesStore()
+        await salesStore.FetchSales().then(() => {
+          this.showSales = this.$route.path === '/search:sales'
+          this.showLots = this.$route.path === '/search:lots'
 
-      await salesStore.FetchSales().then(() => {
-        if (this.$route.path === '/search:sales') {
-          this.showLots = false
-          this.showSales = true
-
-          let filteredSales = salesStore.sales.data.filter(sale => {
-            return sale.description.toLowerCase().includes(search.toLowerCase()) 
+          let filteredItems = salesStore[this.showSales ? 'sales' : 'lots'].data.filter(item => {
+            return item.description.toLowerCase().includes(search.toLowerCase()) 
           })
 
-          this.getResult = filteredSales && filteredSales.length > 0 ? filteredSales : undefined
-        }
+          this.getResult = this.showSales ? filteredItems : undefined
+          this.getResultChilds = this.showLots ? filteredItems : undefined
 
-        if (this.$route.path === '/search:lots') {
-          this.showLots = true
-          this.showSales = false
-
-          let filteredLots = salesStore.lots.data.filter(lot => {
-            return lot.toLowerCase().includes(search.toLowerCase()) 
-          })
-          
-          this.getResultChilds = filteredLots && filteredLots.length > 0 ? filteredLots : undefined
-        }
-
-        this.lastQueryUrl = this.$route.path + '?' + this.$route.query.params
-
-      })
-
-    },
-    deep: true,
-    immediate: true
-  }
-},
+          this.lastQueryUrl = this.$route.path + '?' + this.$route.query.params
+        })
+      },
+      deep: true,
+      immediate: true
+    }
+  },
 
   methods: {
     activeTab(type) {
