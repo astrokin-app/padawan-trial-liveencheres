@@ -1,3 +1,4 @@
+<!-- create generic form component add into ext library to use -->
 <template>
   <Form @submit="onSubmit" class="form-group" style="text-align: initial">
     <div
@@ -11,7 +12,8 @@
         <p>{{ message }}</p>
       </ErrorMessage>
     </div>
-    <button class="submit-btn">{{ btnLabel }}</button>
+    <!-- btn component -->
+    <!-- <button class="submit-btn">{{ btnLabel }}</button> -->
   </Form>
 </template>
 
