@@ -19,6 +19,7 @@
     "jquery": "^1.9.1",
     "json-server": "^0.16.1",
     "pinia": "^2.0.30",
+    "vee-validate": "^4.7.4",
     "vue": "^2.6.11",
     "vue-konami-code": "^1.0.0",
     "vue-router": "^3.6.5"
