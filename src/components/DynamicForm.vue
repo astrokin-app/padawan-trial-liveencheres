@@ -16,8 +16,6 @@
 </template>
 
 <script>
-// import Form from '../components/Form.vue'
-import { useSalesStore } from '../stores/salesStore';
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import { required, email, min } from '@vee-validate/rules'
 import { localize } from '@vee-validate/i18n'

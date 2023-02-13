@@ -24,8 +24,8 @@
 
           </b-modal>
         </div>
-        <div v-if="admin">
-          <!-- add component -->
+        <!-- use form builder component -->
+        <!-- <div v-if="admin">
           <b-button v-b-modal.my-modal>Créer une vente</b-button>
           <b-modal id="my-modal" :no-close-on-backdrop="true">
             <div>
@@ -74,7 +74,7 @@
               <button v-b-modal.modal-close_visit class="btn btn-success btn-sm m-1" @click="createSale(), refreshDatas()">Creer</button>
             </template>
           </b-modal>
-        </div>
+        </div> -->
         <b-nav-form>
           <b-form-input v-model="search" size="sm" class="mr-sm-2" placeholder="Que cherchez vous ?"></b-form-input>
           <b-button size="sm" class="my-sm-0" @click="goToSearch()">Rechercher</b-button>
